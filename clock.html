@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+
+#header {
+  font-size: 3.5em; 
+}
+
+hr {
+  width: 40%; 
+  height: 1px; 
+  background: black;
+  margin-top: 50px; 
+}
+
+#time {
+  font-size: 8em;
+  margin: 100px;
+}
+
+#hexNum {
+  font-size: 2em;
+}
+</style>
+</head>
+<h><center><font size="10"><u>HEXCLOCK</u></font></center></h>
+<body background="C:\Users\MAHE\Desktop\TASK-1/img1.jpg">
+<center><div id="time"></div></center>
+<script>
+function time() {
+  var date = new Date();
+  var hours = date.getHours(); 
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  var showTime = ""; 
+  var arr = [hours, minutes, seconds].map(function(num) {
+   
+    return num < 10 ? '0' + num : String(num); 
+  });
+  hours = arr[0];
+  minutes = arr[1];
+  seconds = arr[2];
+  
+  showTime = "#"+ hours + ":" + minutes + ":" + seconds;
+  document.getElementById("time").textContent = showTime; 
+  
+  return hours + minutes + seconds;
+}
+function output(time) {
+  var color = '#' + time; 
+  document.body.style.height = '100vh'; 
+  document.getElementById("hexNum").textContent = color; 
+  document.body.bgColor = color;  
+}
+
+function startClick(callback) {
+  document.body.addEventListener('dblclick', function(event) {
+    callback();
+  });
+}
+
+function stopClick(callback, name) {
+  document.body.addEventListener('click', function(event) {
+    callback(name);
+  });
+}
+
+function init() {
+  var tick = setInterval(function() { output(time()); }, 1000);
+  stopClick(clearInterval, tick); 
+  startClick(init);
+}
+
+init(); 
+</script>
+</body>
+</html>
+

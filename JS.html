@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#myDIV {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: darkolivegreen;
+  margin-top: 20px;
+}
+#myDIV1 {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: darkolivegreen;
+  margin-top: 20px;
+}
+#header {
+  font-size: 3.5em; 
+}
+
+hr {
+  width: 40%; 
+  height: 1px; 
+  background: darkolivegreen;
+  margin-top: 50px; 
+}
+
+#time {
+  font-size: 8em;
+  margin: 100px;
+}
+
+#hexNum {
+  font-size: 2em;
+}
+</style>
+</head>
+<body background="C:\Users\MAHE\Desktop\TASK-1/img1.jpg">
+<h><font size="10"><center><u><i>CHOOSE YOUR PREFERENCES AND HAVE A GREAT TIME</i></u></center></font></h>
+
+
+<button onclick="myFunction()"><font size="4">ACTION BOOKS</font></button>
+<button onclick="myFunction1()"><font size="4">ROMANTIC BOOKS</font></button>
+
+<div id="myDIV"><p><b><font size="3"><u>THIS SECTION CONSISTS OF ACTION BOOKS:</u></font></b></p>
+ <p1> 1."Levaniathan Wakes"||
+  2."The Warrior's Apprentice"||
+  3."Use of Weapons"||
+  4."Uncharted Territory"||
+  5."Deathworld".</p1>
+</div>
+<div id="myDIV1"><p><font size="3"><b><u>THIS SECTION CONSISTS OF ROMANTIC BOOKS:</u></b></font></p>
+1. "Love Story"||
+2. "Pride and Prejudice"||
+3. "The Notebook"||
+4. "Outlander"||
+5. "Jane Eyre"
+
+</div>
+
+
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function myFunction1() {
+  var x = document.getElementById("myDIV1");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<h><center><font size="8"><u>HEXCLOCK</u></font></center></h>
+<center><div id="time" style="background-color:darkolivegreen"></div></center>
+<script>
+function time() {
+  var date = new Date();
+  var hours = date.getHours(); 
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  var showTime = ""; 
+  var arr = [hours, minutes, seconds].map(function(num) {
+   
+    return num < 10 ? '0' + num : String(num); 
+  });
+  hours = arr[0];
+  minutes = arr[1];
+  seconds = arr[2];
+  
+  showTime = "#"+ hours +  minutes + seconds;
+  document.getElementById("time").textContent = showTime; 
+  
+  return hours + minutes + seconds;
+}
+function output(time) {
+  var color = '#' + time; 
+  document.body.style.height = '100vh'; 
+  document.getElementById("hexNum").textContent = color; 
+  document.body.bgColor = color;  
+}
+
+function startClick(callback) {
+  document.body.addEventListener('dblclick', function(event) {
+    callback();
+  });
+}
+
+function stopClick(callback, name) {
+  document.body.addEventListener('click', function(event) {
+    callback(name);
+  });
+}
+
+function init() {
+  var tick = setInterval(function() { output(time()); }, 1000);
+  stopClick(clearInterval, tick); 
+  startClick(init);
+}
+
+init(); 
+</script>
+</body>
+</html>
+
